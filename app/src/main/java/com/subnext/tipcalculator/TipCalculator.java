@@ -30,8 +30,9 @@ public class TipCalculator extends AppCompatActivity {
             float billAmount = Float.parseFloat(editTextBill.getText().toString());
             EditText editTextPercent = (EditText) findViewById(R.id.editText2);
             float tipPercent = Float.parseFloat(editTextPercent.getText().toString());
-            float totalAmount = billAmount * tipPercent / 100;
-            textViewResult.setText("Total : "+totalAmount);
+            float tipAmount = Math.round((billAmount * tipPercent / 100)*100)/100;
+            float totalAmount =  Math.round((tipAmount + billAmount)*100)/100;
+            textViewResult.setText("Tip: "+tipAmount+", Total:"+totalAmount);
         }
         catch (Exception e){
             textViewResult.setText("Error : Please enter the Bill amount and percentage correctly.");
