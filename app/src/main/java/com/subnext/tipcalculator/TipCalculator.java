@@ -27,16 +27,20 @@ public class TipCalculator extends AppCompatActivity {
         TextView textViewResult = (TextView) findViewById(R.id.textView3);
         try {
             EditText editTextBill = (EditText) findViewById(R.id.editText);
-            float billAmount = Float.parseFloat(editTextBill.getText().toString());
+            double billAmount = Double.parseDouble(editTextBill.getText().toString());
             EditText editTextPercent = (EditText) findViewById(R.id.editText2);
-            float tipPercent = Float.parseFloat(editTextPercent.getText().toString());
-            float tipAmount = Math.round((billAmount * tipPercent / 100)*100)/100;
-            float totalAmount =  Math.round((tipAmount + billAmount)*100)/100;
-            textViewResult.setText("Tip: "+tipAmount+", Total:"+totalAmount);
+            double tipPercent = Double.parseDouble(editTextPercent.getText().toString());
+            double tipAmount = billAmount * tipPercent / 100;
+            double totalAmount =  tipAmount + billAmount;
+            textViewResult.setText("Tip: "+round(tipAmount)+", Total:"+round(totalAmount));
         }
         catch (Exception e){
             textViewResult.setText("Error : Please enter the Bill amount and percentage correctly.");
         }
+    }
+
+    private double round(double num){
+        return Math.round(num*100.0)/100.0;
     }
 
     @Override
@@ -44,13 +48,14 @@ public class TipCalculator extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        /*int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
+        */
         return super.onOptionsItemSelected(item);
+
     }
 }
